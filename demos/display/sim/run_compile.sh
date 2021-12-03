@@ -1,9 +1,11 @@
-rem if exist ..\inst_mem.mif (
-rem     copy /Y ..\inst_mem.mif .
-rem )
-rem if exist ..\inst_mem_bb.v (
-rem     del ..\inst_mem_bb.v
-rem ) WHY?
+if [ -f ../inst_mem.mif ]; then (
+     cp /Y ../inst_mem.mif .
+)
+fi
+if [ -f ../inst_mem_bb ]; then (
+     rm ../inst_mem_bb.v
+)
+fi
 
 if [ -d work ]
 then 
