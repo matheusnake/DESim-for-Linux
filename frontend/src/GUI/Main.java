@@ -289,20 +289,20 @@ public class Main extends Application {
             }
 
             // check if it has run_compile.bat
-            Path compileBatPath = simPath.resolve("run_compile.bat");
+            Path compileBatPath = simPath.resolve("run_compile.sh");
             File compileBatFile = new File(compileBatPath.toString());
             if (!compileBatFile.exists()) {
-                Message msg = new Message("Project '" + dir.getName() + "' should contain run_compile.bat in sim subfolder.",
+                Message msg = new Message("Project '" + dir.getName() + "' should contain run_compile.sh in sim subfolder.",
                         MessageType.ERROR);
                 Main.messageBox.addMessage(msg);
                 return 1;
             }
 
             // check if it has run_sim.bat
-            Path simBatPath = simPath.resolve("run_sim.bat");
+            Path simBatPath = simPath.resolve("run_sim.sh");
             File simBatFile = new File(simBatPath.toString());
             if (!simBatFile.exists()) {
-                Message msg = new Message("Project '" + dir.getName() + "' should contain run_sim.bat in sim subfolder.",
+                Message msg = new Message("Project '" + dir.getName() + "' should contain run_sim.sh in sim subfolder.",
                         MessageType.ERROR);
                 Main.messageBox.addMessage(msg);
                 return 1;

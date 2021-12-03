@@ -41,7 +41,7 @@ public class CompileTask extends ShellTask {
         boolean compilationError = false;
 
         try {
-            shell.stdIn.write("run_compile.bat\n");
+            shell.stdIn.write("bash run_compile.sh\n");
             shell.stdIn.write( "echo testbench_compilation_complete\n" );
             shell.stdIn.flush();
 

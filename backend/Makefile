@@ -1,17 +1,20 @@
 # Copyright (c) 2020 FPGAcademy
 # Please see license at https://github.com/fpgacademy/DESim
 
-MODELSIM_DIR = C:\intelFPGA\19.1\modelsim_ae
+MODELSIM_DIR = /home/${USER}/intelFPGA_lite/20.1/modelsim_ase
 
-CFLAGS = -m32 -static -c -Wall -g -fno-diagnostics-show-caret -fpic -Iinclude -I$(MODELSIM_DIR)/include
-LDFLAGS = -m32 -static -g -shared -lmtipli
+CFLAGS = -m32 -c -Wall -g -fno-diagnostics-show-caret -fPIC -Iinclude -I$(MODELSIM_DIR)/include
+LDFLAGS = -m32 -g -shared -lmtipli 
 
 ifeq ($(OS),Windows_NT)
 	LDFLAGS += -lws2_32
 	LDFLAGS += -L$(MODELSIM_DIR)/win32aloem
+else
+	LDFLAGS += -fPIC
+	LDFLAGS += -L$(MODELSIM_DIR)/linuxaloem
 endif
 
-all: dist/simfpga.vpi
+all: dist/simfpga.vpi update_demos
 
 utils.o: utils.c include/utils.h
 	gcc utils.c $(CFLAGS)
@@ -38,11 +41,11 @@ dist/simfpga.vpi: sim_task.o utils.o fpga.o fpga_output_device.o fpga_input_devi
 	g++ -o dist/simfpga.vpi fpga_inout_device.o keyboard_input.o fpga_input_device.o fpga_output_device.o fpga.o sim_task.o utils.o $(LDFLAGS)
 
 update_demos: dist/simfpga.vpi
-	cp dist/simfpga.vpi ../demos/Accumulate/sim/.
-	cp dist/simfpga.vpi ../demos/Addern/sim/.
-	cp dist/simfpga.vpi ../demos/Counter/sim/.
-	cp dist/simfpga.vpi ../demos/Counter_LPM/sim/.
-	cp dist/simfpga.vpi ../demos/Display/sim/.
+	cp dist/simfpga.vpi ../demos/accumulate/sim/.
+	cp dist/simfpga.vpi ../demos/addern/sim/.
+	cp dist/simfpga.vpi ../demos/counter/sim/.
+	#cp dist/simfpga.vpi ../demos/Counter_LPM/sim/.
+	cp dist/simfpga.vpi ../demos/display/sim/.
 	cp dist/simfpga.vpi ../demos/GPIO/gpio_bidir_demo/sim/.
 	cp dist/simfpga.vpi ../demos/GPIO/gpio_in_demo/sim/.
 	cp dist/simfpga.vpi ../demos/GPIO/gpio_out_demo/sim/.

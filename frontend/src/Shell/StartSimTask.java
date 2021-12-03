@@ -42,7 +42,7 @@ public class StartSimTask extends ShellTask {
         boolean loadingError = false;
 
         try {
-            shell.stdIn.write("run_sim.bat\n");
+            shell.stdIn.write("bash run_sim.sh\n");
             shell.stdIn.flush();
 
             String s;

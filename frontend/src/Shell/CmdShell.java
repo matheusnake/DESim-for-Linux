@@ -41,6 +41,10 @@ public class CmdShell {
             if (osName.toLowerCase().contains( "windows" )) {
                 return getShellWindows( startInDirectory );
             }
+            else if (osName.toLowerCase().contains("linux")){
+                return getShellLinux( startInDirectory );
+            }
+
         } catch (Exception err) {
             Main.messageBox.addMessage(MSG_OPENING_FAILED);
             return null;
@@ -61,7 +65,17 @@ public class CmdShell {
                 "cmd"
         };
 
+        return new CmdShell(shellCmdArray, startInDirectory );
+    }
+
+    private static CmdShell getShellLinux( String startInDirectory ) throws IOException {
+
+        String[] shellCmdArray = new String[]{
+                "bash"
+        };
+
         return new CmdShell( shellCmdArray, startInDirectory );
+
     }
     // </editor-fold>
     // </editor-fold>
